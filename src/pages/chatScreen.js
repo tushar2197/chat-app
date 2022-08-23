@@ -1,6 +1,6 @@
 import { useState } from "react";
 import socketClient from "socket.io-client";
-const SERVER = "http://localhost:8080";
+const SERVER = "http://3.82.115.123:8080";
 
 export const ChatScreen = () => {
   let socket = socketClient(SERVER);
