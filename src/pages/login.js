@@ -13,7 +13,7 @@ export const Login = () => {
   const onSubmit = async (data) => {
     let config = {
       method: "post",
-      url: "http://3.82.115.123:5001/api/v1/user/create",
+      url: "http://54.163.188.182:5001/api/v1/user/create",
       headers: {
         "Content-Type": "application/json",
       },
