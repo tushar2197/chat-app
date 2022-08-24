@@ -6,7 +6,7 @@ export const ChatRoom = () => {
   const joinChat = async () => {
     let config = {
       method: "post",
-      url: "http://localhost:5001/api/v1/chat-room/create",
+      url: "http://54.163.188.182:5001/api/v1/chat-room/create",
       headers: {
         "Content-Type": "application/json",
       },
