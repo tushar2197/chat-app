@@ -52,7 +52,7 @@ export const ChatScreen = () => {
             return (
               <p
                 key={index}
-                className={x.senderId == userId ? "left" : "right"}
+                className={x.senderId === userId ? "left" : "right"}
               >
                 {x.content}
               </p>
