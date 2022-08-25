@@ -1,61 +1,40 @@
-import { useState } from "react";
-import socketClient from "socket.io-client";
-const SERVER = "http://54.163.188.182:8000";
-
+import { useEffect, useState } from "react";
+import socket from "./socket";
 export const ChatScreen = () => {
-  let socket = socketClient(SERVER);
+  let roomId = localStorage.getItem("roomId");
+
+  useEffect(() => {
+    socket.emit("init", roomId);
+  }, [roomId]);
+  const [id, setId] = useState();
 
   const [message, setMessage] = useState();
-  const [data, setData] = useState([]);
-  let roomId = localStorage.getItem("roomId");
-  socket.on("connection", () => {
-    console.log(`I'm connected with the back-end`);
-  });
-  socket.emit("join", roomId, (ack) => {
-    console.log(ack);
-  });
-  socket.on(roomId, (data1) => {
-    let array = [data];
-    let userId = localStorage.getItem("userID");
-    // array = data;
-    let record = (
-      <>
-        <p className={userId === data1.senderId ? "left" : "right"}>
-          {data1.content}
-        </p>
-      </>
-    );
-    array.push(record);
-    setData(array);
-  });
 
-  const sendMessage = async () => {
-    let data2 = {
-      roomId,
+  const onsubmit = () => {
+    let chatData = {
+      roomId: localStorage.getItem("roomId"),
+      userId: localStorage.getItem("userId"),
       content: message,
-      senderId: localStorage.getItem("userId"),
     };
-    socket.emit("sendMessage", data2);
-    // let data = {
-    //   senderId: localStorage.getItem("userId"),
-    //   content: message,
-    //   roomId: localStorage.getItem("roomId"),
-    // };
+    socket.emit("request", chatData);
   };
+  console.log("roomId", roomId);
+  socket.on(roomId, (data) => console.log(data));
   return (
     <>
       <div className="chat">
         <div className="header">
-          <div className="name">{localStorage.getItem("username")}</div>
+          <div className="name">
+            {roomId + localStorage.getItem("username") + id}
+          </div>
         </div>
-        <div className="chatScreen">{data}</div>
-        <div className="input">
+        <div className="chatScreen"></div>
+        <div className="text">
           <input
             type="text"
-            name="chat"
             onChange={(e) => setMessage(e.target.value)}
-          />
-          <button onClick={sendMessage}>send</button>
+          ></input>
+          <button onClick={onsubmit}>submit</button>
         </div>
       </div>
     </>
