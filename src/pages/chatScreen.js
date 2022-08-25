@@ -6,7 +6,7 @@ export const ChatScreen = () => {
   useEffect(() => {
     socket.emit("init", roomId);
   }, [roomId]);
-  const [id, setId] = useState();
+  const [id] = useState();
 
   const [message, setMessage] = useState();
 
