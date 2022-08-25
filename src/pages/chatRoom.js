@@ -6,7 +6,7 @@ export const ChatRoom = () => {
   const joinChat = async () => {
     let config = {
       method: "post",
-      url: "http://54.163.188.182:5001/api/v1/chat-room/create",
+      url: "https://green-months-scream-122-170-33-39.loca.lt/api/v1/chat-room/create",
       headers: {
         "Content-Type": "application/json",
       },
@@ -19,7 +19,14 @@ export const ChatRoom = () => {
     let dataResponse = await axios(config);
     if (dataResponse) {
       console.log("dataResponse.data.", dataResponse.data);
+      let data = {
+        drId: "62ef944d81cbda2d545341ae",
+        appointmentId: "62fcc57bc12443789b9fcd1a",
+        patientId: "62f226d12ca70035ca1b0343",
+        roomId: dataResponse.data.roomId,
+      };
       localStorage.setItem("roomId", dataResponse.data.roomId);
+      localStorage.setItem("roomData", JSON.stringify(data));
       navigate("/chat/message");
     }
   };

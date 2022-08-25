@@ -55,6 +55,7 @@
 .chatScreen {
   height: 80vh;
   border: 1px solid #61dafb;
+  overflow: scroll;
 }
 
 .right {

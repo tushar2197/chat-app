@@ -9,7 +9,7 @@ export const LoginDr = () => {
   const onSubmit = async (data) => {
     let config = {
       method: "post",
-      url: "http://54.163.188.182:5001/api/v1/user/verify-otp",
+      url: "https://green-months-scream-122-170-33-39.loca.lt/api/v1/user/verify-otp",
       headers: {
         "Content-Type": "application/json",
       },
