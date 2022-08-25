@@ -4,13 +4,11 @@ export const ChatScreen = () => {
   const [dataMessage, setDataMessage] = useState([]);
   const [message, setMessage] = useState();
 
-  let data = JSON.parse(localStorage.getItem("roomData"));
-
   let roomId = localStorage.getItem("roomId"),
     userId = localStorage.getItem("userId");
 
   useEffect(() => {
-    socket.emit("init", data);
+    socket.emit("init", JSON.parse(localStorage.getItem("roomData")));
   }, [roomId]);
 
   const onsubmit = () => {
@@ -53,7 +51,7 @@ export const ChatScreen = () => {
             return (
               <p
                 key={index}
-                className={x.senderId == userId ? "left" : "right"}
+                className={x.senderId === userId ? "left" : "right"}
               >
                 {x.content}
               </p>
