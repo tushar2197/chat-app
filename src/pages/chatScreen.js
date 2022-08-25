@@ -11,6 +11,7 @@ export const ChatScreen = () => {
     socket.emit("init", JSON.parse(localStorage.getItem("roomData")));
   }, [roomId]);
 
+  let data = JSON.parse(localStorage.getItem("roomData"));
   const onsubmit = () => {
     let chatData = {
       roomId: localStorage.getItem("roomId"),
@@ -51,7 +52,7 @@ export const ChatScreen = () => {
             return (
               <p
                 key={index}
-                className={x.senderId === userId ? "left" : "right"}
+                className={x.senderId == userId ? "left" : "right"}
               >
                 {x.content}
               </p>
